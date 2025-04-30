@@ -2,7 +2,7 @@
 
 class Program
 {
-    public static List<string> tasks = new List<string>();
+    public static List<Task> tasks = new List<Task>();
     static void Main(string[] args)
     {
         Console.WriteLine("Hello CLI!");
@@ -26,6 +26,7 @@ class Program
                     HandleUpdateCommand(args);
                     break;
                 case "delete":
+                    HandleDeleteCommand(args);
                     break;
                 case "mark-in-progress":
                     break;
@@ -62,12 +63,12 @@ class Program
         switch (args.Length)
         {
             case 2:
-                tasks.Add(args[1]);
-                Console.WriteLine($"Add {args[1]}.");
+                Task newTask = new Task(args[1]);
+                tasks.Add(newTask);
                 break;
             case 3:
-                tasks.Add(args[1]); // also pass description
-                Console.WriteLine($"Add {args[1]}.");
+                Task newTaskWithDescription = new Task(args[1], args[2]);
+                tasks.Add(newTaskWithDescription); 
                 break;
             default:
                 Console.WriteLine("Wrong use case, please check for --help.");
@@ -89,6 +90,23 @@ class Program
         // Check all tasks id and compare the passaed value if you find the task object store here.
         // if you cant find task id then print a message that task doesnt exist.
         // assign a new value task object.
-
+    }
+    public static void HandleDeleteCommand(string[] args)
+    {
+        switch (args.Length)
+        {
+            case 2:
+                Console.WriteLine($"Delete id {args[1]}.");
+                break;
+            default:
+                Console.WriteLine("Wrong use case, please check for --help.");
+                break;
+        }
+    }
+    public static void PrintList(){
+        foreach (var item in tasks)
+        {
+            item.PrintTask();
+        }
     }
 }
