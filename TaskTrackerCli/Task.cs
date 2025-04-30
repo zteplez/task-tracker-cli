@@ -14,15 +14,21 @@ public class Task
         Name = name;
         Description = null;
         currentStatus = Status.NOT_DONE;
-        //Implement created at and updated
+        createdAt = DateTime.Now;
     }
     
-    public Task(string name, string Description)
+    public Task(string name, string description)
     {
         Id = 1;
         Name = name;
-        Description = null;
+        Description = description;
         currentStatus = Status.NOT_DONE;
-        //Implement created at and updated
+        createdAt = DateTime.Now;
+    }
+    public void PrintTask(){
+        Console.WriteLine($"{Id} - {Name} - {currentStatus}");
+        if(Description != null){
+            Console.WriteLine($"--------> {Description}");
+        }
     }
 }
